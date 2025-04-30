@@ -13,7 +13,7 @@ function Team() {
     fullname:"",
     email: "",
     phone: "",
-    password:"user@123",
+    password:"Team@123",
     role:"Member",
     assigned:[],
     createdBy:currentadmin._id,
@@ -45,6 +45,14 @@ const deleteTeamMember = async(id)=>{
     setFormdata({...formData, [e.target.name]:e.target.value})
   }
   const handlesubmit = async()=>{
+    if(
+      (formData.name.trim().length === 0) || 
+    (formData.email.trim().length === 0) ||
+    (formData.phone.trim().length === 0)
+  ){
+    alert('Please fill all the fields')
+    return
+  }
     try{
       const response = await AddteamMember(formData)
       console.log(response)

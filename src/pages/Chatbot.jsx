@@ -72,6 +72,13 @@ function Chatbot() {
   };
 
   const handlesendMessage = async () => {
+    if (!currentUser){
+      alert('please register yourself first')
+      return
+    }else if(newmessage.message.trim().length === 0){
+      alert('please enter the message')
+      return
+    }
     const response = await sendMessage({ id, message: newmessage });
     const updatedUser = {
       ...currentUser,

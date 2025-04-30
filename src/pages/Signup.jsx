@@ -35,10 +35,14 @@ function Signup() {
       formData.lastname.trim().length === 0 ||
       formData.email.trim().length === 0 ||
       formData.password.trim().length === 0 ||
-      formData.confirmPassword.trim().length === 0
+      formData.confirmPassword.trim().length === 0||
+      checked===false
     ) {
       alert("Please fill all the fields");
       return;
+    }else if(formData.password != formData.confirmPassword){
+      alert('password and confirm password did not match')
+      return
     }
     try {
       const res = await signup(formData);
@@ -55,6 +59,7 @@ function Signup() {
           password: "",
           confirmPassword: "",
         });
+        setChecked(false)
       }
     } catch (err) {
       console.log(err);
@@ -146,6 +151,7 @@ function Signup() {
               <input
                 type="checkbox"
                 id="t&c"
+                checked={checked}
                 className={style.checkinput}
                 onChange={() => {
                   setChecked(true);

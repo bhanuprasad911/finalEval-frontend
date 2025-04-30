@@ -149,6 +149,10 @@ function Contactcenter() {
   };
 
   const handlesendMessage = async () => {
+    if (newmessage.message.trim().length === 0){
+      alert('Please enter the message')
+      return
+    }
     const res = await sendMessage({ id, message: newmessage });
     const updatedMessages = [...selected.messages, newmessage];
     const updated = { ...selected, messages: updatedMessages };
