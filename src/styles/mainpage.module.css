@@ -1,0 +1,390 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.main {
+    width: 99vw;
+    min-height: 100vh;
+    font-family: 'roboto';
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    position: relative;
+}
+
+.header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-left: 2%;
+    padding-right: 2%;
+}
+
+.authLinks {
+    display: flex;
+    gap: 5%;
+    width: 30%;
+    align-items: center;
+    justify-content: flex-end;
+    /* border: 1px solid black; */
+}
+
+.login {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: 'roboto';
+    color: rgb(54, 54, 74);
+    font-size: medium;
+    text-decoration: none;
+
+
+}
+
+.signbutton {
+    background-color: rgb(36, 71, 120);
+    font-family: 'roboto';
+    padding: 1%;
+    font-size: medium;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    width: 20%;
+    text-align: center;
+    text-decoration: none;
+
+}
+
+.uppermainbody {
+    margin-top: 5%;
+    width: 80%;
+    height: 100%;
+    /* border: 1px solid; */
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.uppermainleft {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: flex-start;
+    gap: 1rem;
+}
+
+.uppermainright {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.start {
+    background-color: rgb(36, 71, 120);
+    font-family: 'roboto';
+    padding: 1%;
+    font-size: medium;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    width: 20%;
+    text-align: center;
+}
+
+.card {
+    position: absolute;
+    top: 2%;
+    left: 65%;
+}
+
+.graph {
+    position: absolute;
+    top: 17%;
+    right: 10%;
+    height: 4%;
+    width: 10%;
+
+}
+
+.calender {
+    position: absolute;
+    top: 15%;
+    left: 45%;
+    height: 6%;
+    width: 15%;
+}
+
+.upperfoot {
+    width: 100%;
+    background-color: rgb(235, 241, 250);
+    padding: 2rem;
+    margin-top: 4%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.secondheader {
+    margin-top: 5%;
+    width: 50%;
+    text-align: center;
+    gap: 2%;
+}
+
+.secondheadh1 {
+    color: rgb(47, 63, 77);
+    font-size: xx-large;
+}
+
+.secondheadp {
+    font-size: medium;
+}
+
+.rect1 {
+
+    padding: 3rem;
+    background-color: rgb(113, 166, 217);
+    clip-path: polygon(10% 0%, 90% 0%, 85% 100%, 16% 100%);
+    /* margin-bottom: -5%; */
+    box-shadow: 0px 0px 10px 10px green;
+    z-index: 1;
+}
+
+.rect2 {
+
+    padding: 3rem;
+    clip-path: polygon(20% 0%, 80% 0%, 74% 100%, 26% 100%);
+    background-color: rgb(58, 121, 189);
+}
+
+.rect3 {
+
+    padding: 3rem;
+    clip-path: polygon(30% 0%, 70% 0%, 65% 100%, 36% 100%);
+    background-color: rgb(48, 96, 140);
+    filter: drop-shadow(0px 5px 10px rgba(0, 0, 0, 0.3));
+}
+
+.design {
+    width: 80%;
+    /* border: 1px solid black; */
+    margin-top: 3%;
+    display: flex;
+    align-items: start;
+    justify-content: space-between;
+    margin: 5%;
+    box-shadow: 0px 0px 10px grey;
+    border-radius: 10px;
+    padding: 1% 2%;
+    color: rgb(19, 49, 77);
+
+}
+
+.designleft {
+    height: 100%;
+    width: 60%;
+    padding-top: 5%;
+    color: rgb(19, 49, 77);
+}
+
+.designright {
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    /* margin: 2%; */
+    /* border: 1px solid black; */
+}
+
+.medialogos {
+    width: 60%;
+    height: 40%;
+    margin-left: 15%;
+    /* background:rgba(220, 231, 242, 0.5) ;
+    box-shadow: 0px 0px 10px 10px rgb(220, 231, 242);  */
+}
+
+.arrow1 {
+    position: absolute;
+    /* border: 1px solid black; */
+    width: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 46%;
+    z-index: 2;
+    right: 28%;
+}
+
+.circle11 {
+    height: 200%;
+    width: 12%;
+    border-radius: 50%;
+    background-color: rgb(24, 78, 128);
+}
+
+.line {
+    border: 2px solid rgb(24, 78, 128);
+    margin: 0;
+    padding: 0;
+    width: 50%;
+
+}
+
+.circle12 {
+    height: 70%;
+    width: 12%;
+    border-radius: 50%;
+    background-color: rgb(24, 78, 128);
+
+}
+
+.arrow2 {
+    position: absolute;
+    /* border: 1px solid black; */
+    width: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 39%;
+    z-index: 2;
+    right: 35%;
+
+}
+
+.arrow3 {
+    position: absolute;
+    /* border: 1px solid black; */
+    width: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 42.5%;
+    right: 32%;
+
+}
+
+.capture {
+    position: absolute;
+    left: 47%;
+    top: 38.9%;
+}
+
+.nurture {
+    position: absolute;
+    left: 50%;
+    top: 42.4%
+}
+
+.close {
+    position: absolute;
+    left: 56%;
+    top: 45.8%;
+}
+
+.thirdhead {
+    text-align: center;
+    color: rgb(47, 63, 77);
+}
+
+.plans {
+    display: flex;
+    width: 80%;
+    padding: 1%;
+    align-items: stretch;
+    justify-content: space-around;
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+
+.mainfooter {
+    width: 100%;
+    display: flex;
+    margin-top: 5%;
+}
+
+.mainfooter>div {
+    width: 25%;
+    /* border: 1px solid; */
+    padding: 2%;
+
+}
+
+.main2 {
+    width: 100%;
+    height: 100%;
+    font-family: 'roboto';
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    background-color: rgb(250, 252, 255);
+}
+
+.product {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+
+
+
+}
+
+.primer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+
+
+
+}
+.vidoeplay{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5%;
+}
+.linkp{
+    color: rgb(36, 71, 120);
+}
+.playlink{
+    text-decoration: none;
+}
+.buttons{
+    display: flex;
+    width: 100%;
+    gap: 5%;
+
+}
+
+.dev {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    /* Align left */
+    justify-content: flex-start;
+
+}
+
+.p {
+    color: grey;
+}
+.links{
+    width: 20%;
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    z-index: 1;
+    bottom: 3%;
+    font-size: large;
+}
+

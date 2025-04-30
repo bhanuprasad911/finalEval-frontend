@@ -1,0 +1,238 @@
+.main {
+    width: 99vw;
+    min-height: 100vh;
+    font-family: 'Roboto', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    position: relative;
+}
+
+.header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 2%;
+}
+
+.main2 {
+    width: 100%;
+    min-height: 100%;
+    font-family: 'Roboto', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    background-color: rgb(250, 252, 255);
+}
+
+.uppermainbody {
+    margin-top: 3%;
+    width: 80%;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-wrap: wrap; /* 👈 important for small screens */
+    gap: 1rem;
+}
+
+.uppermainleft, .uppermainright {
+    flex: 1 1 45%; /* 👈 make both sides flexible */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 1rem;
+}
+
+.uppermainleft {
+    align-items: flex-start;
+}
+
+.card {
+    position: absolute;
+    top: 10%;
+    left: 65%;
+}
+
+.graph {
+    position: absolute;
+    top: 65%;
+    right: 10%;
+    height: 15%;
+    width: 10%;
+}
+
+.calender {
+    position: absolute;
+    top: 60%;
+    left: 45%;
+    height: 30%;
+    width: 15%;
+}
+
+.upperfoot {
+    width: 100%;
+    background-color: rgb(235, 241, 250);
+    padding: 2rem;
+    margin-top: 4%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.vidoeplay {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5%;
+    flex-wrap: wrap;
+}
+
+.linkp {
+    color: rgb(36, 71, 120);
+}
+
+.playlink {
+    text-decoration: none;
+}
+
+.buttons {
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    gap: 5%;
+}
+
+.chatIconbutton {
+    background-color: rgb(51, 72, 92);
+    padding: 1rem;
+    border-radius: 50%;
+    cursor: pointer;
+    position: absolute;
+    bottom: 1%;
+    right: 2%;
+    color: white;
+    font-weight: 400;
+    height: 13%;
+    width: 16%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.start {
+    background-color: rgb(36, 71, 120);
+    font-family: 'Roboto', sans-serif;
+    padding: 1%;
+    font-size: medium;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    width: 20%;
+    text-align: center;
+}
+
+.bot {
+    position: absolute;
+    bottom: 2%;
+    right: 1%;
+    width: 20%;
+    height: 55%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.image {
+    height: 150%;
+    width: 150%;
+}
+
+
+
+@media screen and (max-width: 1024px) {
+    .card, .graph, .calender {
+        position: static;
+        margin: 1rem 0;
+        width: 80%;
+        height: auto;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .uppermainbody {
+        flex-direction: column;
+        width: 90%;
+    }
+
+    .uppermainleft, .uppermainright {
+        width: 100%;
+    }
+
+    .chatIconbutton {
+        width: 20%;
+        height: 10%;
+    }
+
+    .start {
+        width: 50%;
+    }
+}
+
+@media screen and (max-width: 550px) {
+    /* Hide everything inside .main except .bot */
+    .main > *:not(.bot) {
+        display: none !important;
+    }
+
+    /* Make sure .main and .bot are visible */
+    .main {
+        visibility: visible !important;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        flex-direction: column;
+    }
+
+    .bot {
+        width: 100vw;
+        height: 60vh;
+        display: flex !important;
+        position: relative;
+        align-items: flex-end;
+        justify-content: center;
+        padding: 4%;
+        padding-right: 1%;
+        padding-bottom: 10vh;
+    }
+   
+
+    .chatIconbutton {
+        background-color: rgb(51, 72, 92);
+        padding: 1rem;
+        border-radius: 50%;
+        cursor: pointer;
+        position: absolute;
+        bottom: 5%;
+        right: 2%;
+        color: white;
+        font-weight: 400;
+        height: 15%;
+        width: 19%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: x-large;
+    }
+    .image {
+        height: 100%;
+        width: 100%;
+    }
+}
+

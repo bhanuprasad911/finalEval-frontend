@@ -1,0 +1,116 @@
+.main{
+    width: 100%;
+    height: 100%;
+    padding: 2%;
+    font-family: 'roboto';
+}
+.head{
+    font-weight: 300;
+    color: #6a6b70;
+}
+.searchInput{
+    width: 15%;
+    border: 3px solid rgb(242, 242, 242);
+    background-color: rgb(242, 242, 242);
+    font-size: medium;
+    padding: 1%;
+}
+.filters{
+    display: flex;
+    width: 30%;
+    gap: 5%;
+}
+.filterButton{
+    background: none;
+    color: #888888;
+    cursor: pointer;
+    border: none;
+    margin-left: 5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+.filterButton:hover{
+    color: #184e7f;
+    border-bottom:2px solid #184e7f;
+}
+
+
+.clicked{
+    color: #184e7f;
+    border-bottom:2px solid #184e7f;
+
+
+}
+.line{
+    border-bottom: 1px solid #e7e7e7;
+    width: 85%;
+}
+
+
+.chat{
+    width: 100%;
+    height: 10%;
+    border: 1px solid #e7e7e7;
+    margin-top: 2%;
+    padding: 1%;
+
+}
+.names{
+    padding: 1%;
+}
+.ticketdetails{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1%;
+}
+.time{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+}
+.linediv{
+    border-bottom: 1px solid #e7e7e7;
+    width: 100%;
+}
+.userDetails{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 1%;
+}
+.details{
+    font-weight: 300;
+    color: rgb(131, 128, 138);
+    font-size: x-small;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10%;
+    padding-left: 2%;
+}
+.details>h2{
+    font-weight: 300;
+    font-size: small;
+}
+
+.ticketid{
+    font-weight: 400;
+    font-size: medium;
+}
+.time{
+    font-size: medium;
+}
+.date{
+    font-size: small;
+    color: #6a6b70;
+}
+.openlink{
+    text-decoration: underline;
+    color: #184e7f;
+    cursor: pointer;
+}
