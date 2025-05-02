@@ -14,47 +14,43 @@ import Bot from "./Bot.jsx";
 import Analytics from "./Analytics.jsx";
 import { useNavigate } from "react-router-dom";
 
-
-
-
 function Chatdashboard(props) {
-  const navigate = useNavigate()
-  const [active, setActive] = useState(Number(localStorage.getItem('activeTab')) || 1);
+  const navigate = useNavigate();
+  const [active, setActive] = useState(
+    Number(localStorage.getItem("activeTab")) || 1
+  );
   const [activeuser] = useState(() => {
-      try {
-        const stored = localStorage.getItem("activeuser");
-        return stored && stored !== "undefined" ? JSON.parse(stored) : null;
-      } catch (err) {
-        console.error("Failed to parse activeuser:", err);
-        return null;
-      }
-    });
-
-    const handlePageHide = () => {
-     
-      const keysToRemove = [
-        "token",
-        "currentadmin",
-        "selected",
-        "activeTab",
-        "showbot", 
-        "currentuser"
-      ];
-  
-      keysToRemove.forEach((key) => localStorage.removeItem(key));
+    try {
+      const stored = localStorage.getItem("activeuser");
+      return stored && stored !== "undefined" ? JSON.parse(stored) : null;
+    } catch (err) {
+      console.error("Failed to parse activeuser:", err);
+      return null;
     }
+  });
 
-    useEffect(() => {
-      const token = localStorage.getItem('token');
-      if (!token) {
-        navigate('/', {replace:true});
-      return
-      }
-    }, []);
+  const handlePageHide = () => {
+    const keysToRemove = [
+      "token",
+      "currentadmin",
+      "selected",
+      "activeTab",
+      "showbot",
+      "currentuser",
+    ];
 
-    
+    keysToRemove.forEach((key) => localStorage.removeItem(key));
+  };
 
-    return (
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      navigate("/", { replace: true });
+      return;
+    }
+  }, []);
+
+  return (
     <div className={style.main}>
       <div className={style.nav}>
         <div className={style.uppernav}>
@@ -66,20 +62,20 @@ function Chatdashboard(props) {
               className={style.showbutton}
               onClick={() => {
                 setActive(1);
-                localStorage.setItem('activeTab', 1);
+                localStorage.setItem("activeTab", 1);
               }}
             >
-              <GoHome/>
+              <GoHome />
               {active === 1 && <p className={style.p}>Dashboard</p>}
             </button>
             <button
               className={style.showbutton}
               onClick={() => {
                 setActive(2);
-                localStorage.setItem('activeTab', 2);
+                localStorage.setItem("activeTab", 2);
               }}
             >
-              <MdOutlineMessage/>
+              <MdOutlineMessage />
               {active === 2 && <p className={style.p}>Contact Center</p>}
             </button>
 
@@ -87,10 +83,10 @@ function Chatdashboard(props) {
               className={style.showbutton}
               onClick={() => {
                 setActive(3);
-                localStorage.setItem('activeTab', 3);
+                localStorage.setItem("activeTab", 3);
               }}
             >
-              <IoStatsChart/>
+              <IoStatsChart />
               {active === 3 && <p className={style.p}>Analytics</p>}
             </button>
 
@@ -98,10 +94,10 @@ function Chatdashboard(props) {
               className={style.showbutton}
               onClick={() => {
                 setActive(4);
-                localStorage.setItem('activeTab', 4);
+                localStorage.setItem("activeTab", 4);
               }}
             >
-              <RiRobot3Line/>
+              <RiRobot3Line />
               {active === 4 && <p className={style.p}>Chat bot</p>}
             </button>
 
@@ -109,10 +105,10 @@ function Chatdashboard(props) {
               className={style.showbutton}
               onClick={() => {
                 setActive(5);
-                localStorage.setItem('activeTab', 5);
+                localStorage.setItem("activeTab", 5);
               }}
             >
-             <RiTeamFill/>
+              <RiTeamFill />
               {active === 5 && <p className={style.p}>Team</p>}
             </button>
 
@@ -120,27 +116,28 @@ function Chatdashboard(props) {
               className={style.showbutton}
               onClick={() => {
                 setActive(6);
-                localStorage.setItem('activeTab', 6);
+                localStorage.setItem("activeTab", 6);
               }}
             >
-              <IoSettingsOutline/>
+              <IoSettingsOutline />
               {active === 6 && <p className={style.p}>Setting</p>}
             </button>
           </div>
         </div>
-        <LiaUserCircle   onClick={()=>{
-         handlePageHide()
-          navigate('/')
-        }} style={
-          {fontSize:'x-large'}
-        }/>
+        <LiaUserCircle
+          onClick={() => {
+            handlePageHide();
+            navigate("/");
+          }}
+          style={{ fontSize: "x-large" }}
+        />
       </div>
       <div className={style.body}>
         {active === 1 && <Dashboard setactiveelement={setActive} />}
-        {active===2 &&  <Contactcenter />}
+        {active === 2 && <Contactcenter />}
         {active === 3 && <Analytics />}
         {active === 4 && <Bot />}
-        {active === 5 &&  <Team />}
+        {active === 5 && <Team />}
         {active === 6 && <Settings />}
       </div>
     </div>

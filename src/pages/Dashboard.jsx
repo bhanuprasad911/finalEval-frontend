@@ -241,7 +241,7 @@ function Dashboard(props) {
       )}
       {activeBtn === 2 && (
         <div className={style.resolved}>
-          {resolvedchats.map((user, index) => {
+          {resolvedchats?.map((user, index) => {
             return (
               <div
                 key={index}
@@ -250,7 +250,7 @@ function Dashboard(props) {
                 <div className={style.ticketdetails}>
                   <div className={style.names}>
                     <h3 className={style.ticketid}>{user.ticket_id}</h3> <br />
-                    <p>{user.messages[0].message}</p>
+                    <p>{user?.messages[0]?.message}</p>
                   </div>
                   <div className={style.time}>
                     <p className={style.date}>

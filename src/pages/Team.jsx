@@ -35,7 +35,7 @@ function Team() {
   const deleteTeamMember = async (id) => {
     const response = await deleteMember(id);
     console.log(response);
-    toast.success(response.message)
+    toast.success(response.message);
     fetchmembers();
     return;
   };
@@ -95,7 +95,7 @@ function Team() {
     try {
       const response = await editMember(editId, formData);
       console.log(response);
-      toast.success(response.message)
+      toast.success(response.message);
       setteamMembers(response.data);
       setFormdata({
         fullname: "",
@@ -106,8 +106,6 @@ function Team() {
         assigned: [],
         createdBy: currentadmin._id,
       });
-      
-
 
       setISedit(false);
       seteditId(null);
@@ -255,14 +253,6 @@ function Team() {
                 onClick={() => {
                   console.log(formData);
                   handlesubmit();
-                  //  setFormdata({
-                  //    fullname:"",
-                  //    email: "",
-                  //    phone: "",
-                  //    password:"user@123",
-                  //    role:"",
-                  //    createdBy:currentadmin._id,
-                  //   })
                 }}
               >
                 Save

@@ -2,22 +2,6 @@ import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip } from 'recharts'
 
 import { fetchMissed } from '../services/index.js';
 import { useEffect, useState } from 'react';
-// const data = [
-//     { name: 'Day 1', missedchats: 85 },
-//     { name: 'Day 2', missedchats: 30 },
-//     { name: 'Day 3', missedchats: 20 },
-//     { name: 'Day 4', missedchats: 15 },
-//     { name: 'Day 5', missedchats: 25 },
-//     { name: 'Day 6', missedchats: 10 },
-//     { name: 'Day 7', missedchats: 50 },
-//     { name: 'Day 8', missedchats: 70 },
-//     { name: 'Day 9', missedchats: 40 },
-//     { name: 'Day 10', missedchats: 31 },
-//     { name: 'Day 11', missedchats: 10 },
-//     { name: 'Day 12', missedchats: 91 },
-//     { name: 'Day 13', missedchats: 24 },
-//     { name: 'Day 14', missedchats: 64 }
-//   ];
 
     const ChartComponent = () => {
       const [data, setdata]=useState([])

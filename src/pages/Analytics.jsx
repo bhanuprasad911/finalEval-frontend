@@ -4,91 +4,98 @@ import style from "../styles/analytics.module.css";
 import { fetchusers } from "../services/index.js";
 import ChartComponent from "./ChartComponent.jsx";
 
-
 function Analytics() {
   const [resolveCount, setresolvedCount] = useState(0);
   const [chatCount, setChatCount] = useState(0);
-  const [users, setusers] = useState([])
-  const [ReplyTime, setReplyTime] = useState(null)
+  const [users, setusers] = useState([]);
+  const [ReplyTime, setReplyTime] = useState(null);
 
   const getUsers = async () => {
     const response = await fetchusers();
     console.log(response);
     console.log(response.data.length);
     setChatCount(response.data.length);
-    setusers(response.data)
+    setusers(response.data);
     const resolved = response.data.filter((user) => user.status === "resolved");
-    
+
     setresolvedCount(Math.ceil((resolved.length / response.data.length) * 100));
 
-    const messagesWithReplies = response.data.filter(item =>
-      item.messages.some(message => message.sender === 'bot')
+    const messagesWithReplies = response.data.filter((item) =>
+      item.messages.some((message) => message.sender === "bot")
     );
-    console.log(messagesWithReplies)
-  
-  let totalReplyTime = 0;
-  let replyCount = 0;
-  
-  messagesWithReplies.forEach(ticket => {
-    const sortedMessages = [...ticket.messages].sort(
-      (a, b) => new Date(a.createdAt) - new Date(b.createdAt)
-    );
+    console.log(messagesWithReplies);
 
-    const botFirstIndex = sortedMessages.findIndex(msg => msg.sender === 'bot');
-  
-    if (botFirstIndex > 0) {
-      const userBeforeBot = [...sortedMessages]
-        .slice(0, botFirstIndex)
-        .reverse()
-        .find(msg => msg.sender === 'user');
-  
-      if (userBeforeBot) {
-        const userTime = new Date(userBeforeBot.createdAt).getTime();
-        const botTime = new Date(sortedMessages[botFirstIndex].createdAt).getTime();
-  
-        const replyTime = botTime - userTime;
-  
-        totalReplyTime += replyTime;
-        replyCount++;
+    let totalReplyTime = 0;
+    let replyCount = 0;
+
+    messagesWithReplies.forEach((ticket) => {
+      const sortedMessages = [...ticket.messages].sort(
+        (a, b) => new Date(a.createdAt) - new Date(b.createdAt)
+      );
+
+      const botFirstIndex = sortedMessages.findIndex(
+        (msg) => msg.sender === "bot"
+      );
+
+      if (botFirstIndex > 0) {
+        const userBeforeBot = [...sortedMessages]
+          .slice(0, botFirstIndex)
+          .reverse()
+          .find((msg) => msg.sender === "user");
+
+        if (userBeforeBot) {
+          const userTime = new Date(userBeforeBot.createdAt).getTime();
+          const botTime = new Date(
+            sortedMessages[botFirstIndex].createdAt
+          ).getTime();
+
+          const replyTime = botTime - userTime;
+
+          totalReplyTime += replyTime;
+          replyCount++;
+        }
       }
-    }
-  });
-  
-  const averageReplyTimeMs = replyCount > 0 ? totalReplyTime / replyCount : 0;
-  const averageReplyTimeSeconds = Math.round(averageReplyTimeMs / 1000);
-  setReplyTime(averageReplyTimeSeconds)
-  
-  console.log(`Average reply time: ${averageReplyTimeSeconds} seconds`);
-}
+    });
+
+    const averageReplyTimeMs = replyCount > 0 ? totalReplyTime / replyCount : 0;
+    const averageReplyTimeSeconds = Math.round(averageReplyTimeMs / 1000);
+    setReplyTime(averageReplyTimeSeconds);
+
+    console.log(`Average reply time: ${averageReplyTimeSeconds} seconds`);
+  };
 
   useEffect(() => {
     getUsers();
-  },[]);
-
+  }, []);
 
   return (
     <div className={style.main}>
-      <h2 style={{ fontWeight: "500", color: " #6a6b70" }}>Analytics</h2><br />
+      <h2 style={{ fontWeight: "500", color: " #6a6b70" }}>Analytics</h2>
+      <br />
       <div className={style.graph}>
-        <p>Missed chats</p><br />
+        <p>Missed chats</p>
+        <br />
         <ChartComponent />
       </div>
       <div className={style.average}>
         <div className={style.circletext}>
-        <h1 style={
-          { color: "#00d907",fontWeight: "400"}
-        }>Average Reply time</h1><br />
-        <p>
-          For highest customer satisfaction rates you should aim to reply to an
-          incoming customer's message in 15 <br /> seconds or less. Quick
-          responses will get you more conversations, help you earn customers
-          trust and <br /> make more sales.
-        </p>
-
+          <h1 style={{ color: "#00d907", fontWeight: "400" }}>
+            Average Reply time
+          </h1>
+          <br />
+          <p>
+            For highest customer satisfaction rates you should aim to reply to
+            an incoming customer's message in 15 <br /> seconds or less. Quick
+            responses will get you more conversations, help you earn customers
+            trust and <br /> make more sales.
+          </p>
         </div>
-        <h1 style={ { color: "#00d907",fontWeight: "400"}}> {ReplyTime?ReplyTime:0} secs</h1>
-        
-      </div><br />
+        <h1 style={{ color: "#00d907", fontWeight: "400" }}>
+          {" "}
+          {ReplyTime ? ReplyTime : 0} secs
+        </h1>
+      </div>
+      <br />
       <div className={style.resolve}>
         <div className={style.circletext}>
           <h1 className={style.circletitle}>Resolved Tickets</h1>
@@ -113,7 +120,8 @@ function Analytics() {
             ]}
           />
         </div>
-      </div><br />
+      </div>
+      <br />
       <div className={style.total}>
         <div className={style.circletext}>
           <h2>Total chats</h2>

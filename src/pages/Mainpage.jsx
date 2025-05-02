@@ -15,10 +15,14 @@ import opendoor from "../assets/Opendoor.svg";
 import socialmedialogos from "../assets/Socialmedialogos.svg";
 import Plan from "./Plan.jsx";
 
-import { PiYoutubeLogo, PiInstagramLogo, PiXLogo, PiDiscordLogo } from "react-icons/pi";
+import {
+  PiYoutubeLogo,
+  PiInstagramLogo,
+  PiXLogo,
+  PiDiscordLogo,
+} from "react-icons/pi";
 import { FiFigma, FiMail } from "react-icons/fi";
 import { SlSocialLinkedin } from "react-icons/sl";
-
 
 function Mainpage() {
   const plans = [
@@ -286,13 +290,13 @@ function Mainpage() {
           })}
 
           <div className={style.links}>
-            <FiMail/>
-            <SlSocialLinkedin/>
-            <PiXLogo/>
-            <PiYoutubeLogo/>
-            <PiDiscordLogo/>
-            <FiFigma/>
-            <PiInstagramLogo/>
+            <FiMail />
+            <SlSocialLinkedin />
+            <PiXLogo />
+            <PiYoutubeLogo />
+            <PiDiscordLogo />
+            <FiFigma />
+            <PiInstagramLogo />
           </div>
         </div>
       </div>

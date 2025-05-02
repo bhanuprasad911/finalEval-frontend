@@ -6,16 +6,13 @@ import { Link, useNavigate } from "react-router-dom";
 import { login } from "../services/index.js";
 import { toast } from "react-toastify";
 
-
-
-
 function Login() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [formdata, setFormdata] = useState({
     email: "",
     password: "",
   });
-  const [token, settoken] = useState(localStorage.getItem('token'))
+  const [token, settoken] = useState(localStorage.getItem("token"));
 
   const handleChange = (e) => {
     setFormdata({ ...formdata, [e.target.name]: e.target.value });
@@ -35,7 +32,7 @@ function Login() {
         localStorage.setItem("token", result.token);
         if (result.token) {
           localStorage.setItem("currentadmin", JSON.stringify(result.user));
-          navigate("/dashboard", {replace:true});
+          navigate("/dashboard", { replace: true });
           return;
         } else {
           toast.error("Invalid Credentials");
@@ -48,11 +45,11 @@ function Login() {
   };
 
   useEffect(() => {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem("token");
     if (token) {
-      navigate('/dashboard', { replace: true });
-      }
-      }, []);
+      navigate("/dashboard", { replace: true });
+    }
+  }, []);
 
   return (
     <div className={style.main}>

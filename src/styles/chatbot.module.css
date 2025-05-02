@@ -14,7 +14,6 @@
 .mainchat{
     width: 100%;
     height: 87%;
-    /* border: 1px solid black; */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -62,9 +61,6 @@
 .messagetext{
     width: 90%;
     height: 100%;
-    /* border: 1px solid black; */
-    /* text-align: center;
-     */
      padding: 4%;
      font-size: large;
      resize: none;
@@ -82,7 +78,6 @@
     align-items: flex-start;
     justify-content: flex-start;
     gap: 2%;
-    /* margin-left: -45%; */
     padding: 2%;
     font-size: x-small;
 }
@@ -131,22 +126,18 @@
 }
 .bot{
     margin: 1%;
-    /* background-color: white; */
     width: auto;
     max-width: 70%;
     font-size: small;
-    /* padding: 2%; */
     border-radius: 0px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     margin-right: auto;
-    /* border: 1px solid black; */
     padding: 2%;
 }
 .user{
     margin: 1%;
-    /* background-color: white; */
     width: auto;
     max-width: 70%;
     font-size: smaller;
@@ -156,7 +147,6 @@
     align-items: flex-start;
     justify-content: center;
     margin-left: auto;
-    /* border: 1px solid black; */
     padding: 2%;
     gap: 3%;
     
@@ -177,9 +167,5 @@
     width: auto;
     max-width: 150%;
 
-
-}
-
-@media screen and (max-width: 550px) {
 
 }

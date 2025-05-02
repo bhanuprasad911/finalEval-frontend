@@ -6,7 +6,7 @@ import {
   fetchTeamMembers,
   assignChat,
   membermessagefetch,
-  updatemissed
+  updatemissed,
 } from "../services/index.js";
 import style from "../styles/chatcenter.module.css";
 import people from "../assets/People.svg";
@@ -24,8 +24,6 @@ import johndoe from "../assets/johndoe.svg";
 import Select from "react-select";
 import { BotCOntext } from "../context/BotContext.jsx";
 import { toast } from "react-toastify";
-
-
 
 function Contactcenter() {
   const [currentadmin, setCurrentAdmin] = useState(
@@ -57,33 +55,27 @@ function Contactcenter() {
   };
   // console.log(team);
 
-  const fetchCurrentDate = async(user)=>{
-    const dateobj = user.ticket_id.slice(-8)
+  const fetchCurrentDate = async (user) => {
+    const dateobj = user.ticket_id.slice(-8);
     const created = new Date(user.createdAt);
-    const now = Date.now(); 
-    const difference = now - created.getTime(); 
-    if (difference>missedChatTimer && user.isMissed === false){
-      const response = await updatemissed(user._id, dateobj)
-      console.log(response)
-    }
-    else if (user.isMissed === true){
-      console.log('already marked as missed')
-    }
-    else{
-      console.log('not missed chat')
+    const now = Date.now();
+    const difference = now - created.getTime();
+    if (difference > missedChatTimer && user.isMissed === false) {
+      const response = await updatemissed(user._id, dateobj);
+      console.log(response);
+    } else if (user.isMissed === true) {
+      console.log("already marked as missed");
+    } else {
+      console.log("not missed chat");
     }
     console.log(`Difference: ${difference} ms`);
-    console.log(`missed chat timer: ${missedChatTimer} ms`)
-    console.log(dateobj)
-  }
+    console.log(`missed chat timer: ${missedChatTimer} ms`);
+    console.log(dateobj);
+  };
 
   useEffect(() => {
     fetchmembers();
-    
   }, [currentadmin]);
-
-
-  
 
   const options = team.map((member) => ({
     value: member._id,
@@ -108,32 +100,31 @@ function Contactcenter() {
 
   const fetchData = async () => {
     const users = await fetchusers();
- 
-    const userfromlocalstorage = JSON.parse(localStorage.getItem("selected"));
-    if(userfromlocalstorage){
 
+    const userfromlocalstorage = JSON.parse(localStorage.getItem("selected"));
+    if (userfromlocalstorage) {
       const user = users.data.find(
         (user) => user.email === userfromlocalstorage.email
       );
       setSelected(user);
     }
-   
+
     setUsers(users.data);
     return;
   };
 
-  const fetchmembermessage= async()=>{
-      const tickets = await membermessagefetch(currentadmin._id)
-      console.log(tickets)
-      setUsers(tickets.data)
-     }
+  const fetchmembermessage = async () => {
+    const tickets = await membermessagefetch(currentadmin._id);
+    console.log(tickets);
+    setUsers(tickets.data);
+  };
 
   useEffect(() => {
-    if(currentadmin.role === 'admin'){
+    if (currentadmin.role === "admin") {
       fetchData();
-      return
+      return;
     }
-    fetchmembermessage()
+    fetchmembermessage();
   }, []);
 
   const handleUpdateStatus = async () => {
@@ -154,9 +145,9 @@ function Contactcenter() {
   };
 
   const handlesendMessage = async () => {
-    if (newmessage.message.trim().length === 0){
-      toast.error('Please enter the message')
-      return
+    if (newmessage.message.trim().length === 0) {
+      toast.error("Please enter the message");
+      return;
     }
     const res = await sendMessage({ id, message: newmessage });
     const updatedMessages = [...selected.messages, newmessage];
@@ -199,8 +190,7 @@ function Contactcenter() {
                 onClick={() => {
                   localStorage.setItem("selected", JSON.stringify(user));
                   setSelected(user);
-                  // window.location.reload()
-                  fetchCurrentDate(user)
+                  fetchCurrentDate(user);
                 }}
               >
                 <img src={people} alt="people" />
@@ -220,81 +210,77 @@ function Contactcenter() {
         })}
       </div>
 
-      <div className={style.chatbody} >
+      <div className={style.chatbody}>
         {selected ? (
           selected.assignedTo?.length > 0 &&
           selected.assignedTo != currentadmin._id ? (
             <p>You no longer have access to this chat</p>
           ) : (
             <>
-            {
-              selected.status==='resolved'?(<p>This chat has been closed</p>):(<>
-              
-              <div className={style.chathead}>
-                <p>{selected.ticket_id}</p>
-              </div>
-              <div className={style.line}></div>
+              {selected.status === "resolved" ? (
+                <p>This chat has been closed</p>
+              ) : (
+                <>
+                  <div className={style.chathead}>
+                    <p>{selected.ticket_id}</p>
+                  </div>
+                  <div className={style.line}></div>
 
-              <div className={style.chats}>
-                  {selected?.messages?.map((message, index) => (
-                    <div
-                      className={
-                        message.sender === "user" ? style.user : style.bot
-                      }
-                      key={index}
+                  <div className={style.chats}>
+                    {selected?.messages?.map((message, index) => (
+                      <div
+                        className={
+                          message.sender === "user" ? style.user : style.bot
+                        }
+                        key={index}
+                      >
+                        {message.sender === "bot" ? (
+                          <>
+                            <div>
+                              <h4>{currentadmin.firstname}</h4>
+                              <p>{message.message}</p>
+                            </div>
+                            <img src={chaticon} alt="" />
+                          </>
+                        ) : (
+                          <>
+                            <img src={johndoe} alt="" />
+                            <div>
+                              <h4>{selected.name}</h4>
+                              <p>{message.message}</p>
+                            </div>
+                          </>
+                        )}
+                      </div>
+                    ))}
+                    {selected?.isMissed === true && (
+                      <>
+                        <br />
+
+                        <p style={{ color: "red", alignSelf: "center" }}>
+                          replying to missed chat
+                        </p>
+                      </>
+                    )}
+                  </div>
+
+                  <div className={style.userinput}>
+                    <textarea
+                      className={style.sendMessage}
+                      placeholder="Type here"
+                      name="message"
+                      value={newmessage.message}
+                      onChange={(e) => handleChange(e)}
+                    ></textarea>
+                    <button
+                      className={style.sendButton}
+                      onClick={handlesendMessage}
                     >
-                      {message.sender === "bot" ? (
-                        <>
-                        <div>
-                          <h4>{currentadmin.firstname}</h4>
-                          <p>{message.message}</p>
-                          </div>
-                          <img src={chaticon} alt="" />
-                        </>
-                      ) : (
-                        <>
-                          <img src={johndoe} alt="" />
-                          <div>
-                            <h4>{selected.name}</h4>
-                          <p>{message.message}</p>
-                          </div>
-                        </>
-                      )}
-                      
-                    </div>
-
-                  ))
-
-                }
-                {
-                        selected?.isMissed === true &&(
-                        <><br />
-                        
-                        <p style={{color:'red',
-                          alignSelf:'center'
-                        }}>replying to missed chat</p>
-                        </>
-                        )
-                      }
-              </div>
-
-              <div className={style.userinput}>
-                <textarea
-                  className={style.sendMessage}
-                  placeholder="Type here"
-                  name="message"
-                  value={newmessage.message}
-                  onChange={(e) => handleChange(e)}
-                ></textarea>
-                <button
-                  className={style.sendButton}
-                  onClick={handlesendMessage}
-                >
-                  <img src={sendIcon} alt="" />
-                </button>
-              </div>
-              </>)
-            }
+                      <img src={sendIcon} alt="" />
+                    </button>
+                  </div>
+                </>
+              )}
             </>
           )
         ) : (

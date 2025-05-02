@@ -8,7 +8,7 @@ function Settings() {
   const navigate = useNavigate();
 
   const [formdata, setFormdata] = useState({
-    _id:currentadmin._id,
+    _id: currentadmin._id,
     firstname: currentadmin.firstname,
     lastname: currentadmin.lastname,
     email: currentadmin.email,
@@ -21,16 +21,14 @@ function Settings() {
     setFormdata({ ...formdata, [event.target.name]: event.target.value });
   };
 
-  const handleEdit = async()=>{
-    try{
+  const handleEdit = async () => {
+    try {
       const response = await editProfile(formdata);
       console.log(response);
-      // navigate("/admin");
-      }
-      catch(error){
-        console.log(error);
-        }
-  }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div className={style.main}>
@@ -39,11 +37,13 @@ function Settings() {
       <br />
       <div className={style.edit}>
         <p className={style.innerhead}>Edit profile</p>
-        <div className={style.line}></div><br />
+        <div className={style.line}></div>
+        <br />
         <div>
           <label className={style.label}>First name:</label>
           <br />
-          <input className={style.input}
+          <input
+            className={style.input}
             type="text"
             name="firstname"
             value={formdata.firstname}
@@ -51,10 +51,12 @@ function Settings() {
               handleFormChange(e);
             }}
           />
-          <br /><br />
+          <br />
+          <br />
           <label className={style.label}>Last name:</label>
           <br />
-          <input className={style.input}
+          <input
+            className={style.input}
             type="text"
             name="lastname"
             value={formdata.lastname}
@@ -62,10 +64,12 @@ function Settings() {
               handleFormChange(e);
             }}
           />
-          <br /><br />
+          <br />
+          <br />
           <label className={style.label}>Email:</label>
           <br />
-          <input className={style.input}
+          <input
+            className={style.input}
             type="email"
             name="email"
             value={formdata.email}
@@ -73,10 +77,12 @@ function Settings() {
               handleFormChange(e);
             }}
           />
-          <br /><br />
+          <br />
+          <br />
           <label className={style.label}>Password:</label>
           <br />
-          <input className={style.input}
+          <input
+            className={style.input}
             type="password"
             name="password"
             value={formdata.password}
@@ -84,10 +90,12 @@ function Settings() {
               handleFormChange(e);
             }}
           />
-          <br /><br />
+          <br />
+          <br />
           <label className={style.label}>Confirm password:</label>
           <br />
-          <input className={style.input}
+          <input
+            className={style.input}
             type="password"
             name="confirmpassword"
             value={formdata.confirmpassword}
@@ -95,11 +103,13 @@ function Settings() {
               handleFormChange(e);
             }}
           />
-          <br /><br />
-          <button className={style.save}
+          <br />
+          <br />
+          <button
+            className={style.save}
             onClick={() => {
               console.log(currentadmin._id, formdata);
-              handleEdit()
+              handleEdit();
             }}
             type="submit"
           >

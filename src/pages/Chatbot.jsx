@@ -7,7 +7,6 @@ import { BotCOntext } from "../context/BotContext";
 import johndoe from "../assets/johndoe.svg";
 import { toast } from "react-toastify";
 
-
 function Chatbot() {
   const { botconfig } = useContext(BotCOntext);
   const [currentUser, setCurrentuser] = useState(() => {
@@ -19,7 +18,7 @@ function Chatbot() {
       return null;
     }
   });
-  // const [user, setuser] = useState([]);
+
   const [allusers, setallusers] = useState(null);
   const id = currentUser ? currentUser._id : null;
 
@@ -39,7 +38,6 @@ function Chatbot() {
   }, []);
 
   const date = new Date();
-  // console.log(botconfig)
 
   const timeDateString =
     date.getHours().toString().padStart(2, "0") +
@@ -74,12 +72,12 @@ function Chatbot() {
   };
 
   const handlesendMessage = async () => {
-    if (!currentUser){
-      toast.error('please register yourself first')
-      return
-    }else if(newmessage.message.trim().length === 0){
-      toast.error('please enter the message')
-      return
+    if (!currentUser) {
+      toast.error("please register yourself first");
+      return;
+    } else if (newmessage.message.trim().length === 0) {
+      toast.error("please enter the message");
+      return;
     }
     const response = await sendMessage({ id, message: newmessage });
     const updatedUser = {
@@ -93,39 +91,6 @@ function Chatbot() {
     console.log(response);
   };
 
-  // const handleSubmit = async () => {
-  //   if (
-  //     formdata.name.trim().length === 0 ||
-  //     formdata.email.trim().length === 0 ||
-  //     formdata.phone.trim().length === 0
-  //   ) {
-  //     alert("Please fill all the fields");
-  //     return;
-  //   }
-  //   const exist = allusers.find((user) => user.email === formdata.email);
-  //   if (exist) {
-  //     setCurrentuser(exist);
-  //     localStorage.setItem("activeuser", JSON.stringify(exist));
-  //     console.log(exist);
-  //     return;
-  //   }
-
-  //   try {
-  //     const response = await addEndUser(formdata);
-  //     console.log(response);
-  //     setCurrentuser(response.data);
-  //     localStorage.setItem("activeuser", JSON.stringify(response.data));
-  //     console.log(formdata);
-  //     setFormdata({
-  //       name: "",
-  //       email: "",
-  //       phone: "",
-  //     });
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // };
-
   const handleSubmit = async () => {
     if (
       formdata.name.trim().length === 0 ||
@@ -136,7 +101,6 @@ function Chatbot() {
       return;
     }
 
-    // ✅ Check if allusers is loaded and is an array
     if (Array.isArray(allusers)) {
       const exist = allusers.find((user) => user.email === formdata.email);
       if (exist) {
@@ -147,13 +111,12 @@ function Chatbot() {
       }
     } else {
       console.error("allusers not loaded yet");
-      // Optionally you can return here or continue to create a new user
     }
 
     try {
       const response = await addEndUser(formdata);
       console.log(response);
-      toast.success('Registered succesfully')
+      toast.success("Registered succesfully");
       setCurrentuser(response.data);
       localStorage.setItem("currentuser", JSON.stringify(response.data));
       console.log(formdata);
@@ -183,7 +146,7 @@ function Chatbot() {
           }}
           className={style.body}
         >
-          {currentUser?.messages?.length > 0 && (
+          {currentUser?.messages?.length > 0 &&
             currentUser.messages.map((item, index) => (
               <div
                 className={item.sender === "user" ? style.user : style.bot}
@@ -194,35 +157,21 @@ function Chatbot() {
                 ) : (
                   <img src={johndoe} alt="" />
                 )}
-                <p>
-                  {item.message}
-                </p>
+                <p>{item.message}</p>
               </div>
-            ))
-          ) }
+            ))}
 
-
-{
-            currentUser &&(
-              botconfig.welcomemessages.map((message, index)=>(
-                <div
-                className={style.bot}
-                key={index}
-              >
-                  <img src={chaticon} alt="" />
-                <p>
-                  {message}
-                </p>
+          {currentUser &&
+            currentUser.messages.length === 0 &&
+            botconfig.welcomemessages.map((message, index) => (
+              <div className={style.bot} key={index}>
+                <img src={chaticon} alt="" />
+                <p>{message}</p>
               </div>
-              ))
-            )
-          }
-          {
-            currentUser && currentUser.messages.length === 0 &&(
-                <p style={{alignSelf:'center'}}>Start a conversation</p>
-              
-            )
-          }
+            ))}
+          {currentUser && currentUser.messages.length === 0 && (
+            <p style={{ alignSelf: "center" }}>Start a conversation</p>
+          )}
 
           {!currentUser ? (
             <div className={style.userInput}>
@@ -298,14 +247,8 @@ function Chatbot() {
           </button>
         </div>
       </div>
-      {/* <button onClick={()=>{
-        localStorage.removeItem('activeuser')
-        setCurrentuser(null)
-        localStorage.removeItem('activechat')
-      }}>Logout</button> */}
     </div>
   );
 }
 
 export default Chatbot;
-

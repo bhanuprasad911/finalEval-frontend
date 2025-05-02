@@ -55,7 +55,6 @@ function Signup() {
         toast.success('Signup success')
         window.location.href = "/login";
       } else {
-        // alert(res.message || "Signup Failed");
         toast.error(err.message || 'Signup failed')
         setFormData({
           firstname: "",
@@ -69,7 +68,6 @@ function Signup() {
       }
     } catch (err) {
       console.log(err);
-      // alert("signin failed");
       toast.error('Signup failed')
     }
   };
