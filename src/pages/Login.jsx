@@ -4,6 +4,8 @@ import AuthImage from "../assets/Authentication.png";
 import mainlogo from "../assets/logo.svg";
 import { Link, useNavigate } from "react-router-dom";
 import { login } from "../services/index.js";
+import { toast } from "react-toastify";
+
 
 
 
@@ -24,7 +26,7 @@ function Login() {
       formdata.email.trim().length === 0 ||
       formdata.password.trim().length === 0
     ) {
-      alert("Please fill in all fields");
+      toast.error("Please fill in all fields");
     } else {
       try {
         const result = await login(formdata);
@@ -36,7 +38,7 @@ function Login() {
           navigate("/dashboard", {replace:true});
           return;
         } else {
-          alert("Invalid Credentials");
+          toast.error("Invalid Credentials");
           setFormdata({ email: "", password: "" });
         }
       } catch (error) {

@@ -4,6 +4,8 @@ import chatlogo from "../assets/sms.svg";
 import { fetchusers, sendMessage, membermessagefetch } from "../services/index.js";
 import userIcon from "../assets/People.svg";
 import { BotCOntext } from "../context/BotContext.jsx";
+import { toast, ToastContainer } from "react-toastify";
+
 
 
 function Dashboard(props) {
@@ -31,6 +33,8 @@ function Dashboard(props) {
 
 
   useEffect(() => {
+// toast.success('Login success')
+
     if(currentadmin.role === 'admin'){
       fetchData();
       return
@@ -116,10 +120,6 @@ function Dashboard(props) {
               <div
               key={index}
               className={style.chat}
-              onClick={() => {
-                localStorage.setItem("activechat", JSON.stringify(user));
-                // console.log(activeuser);
-              }}
             >
               <div className={style.ticketdetails}>
                 <div className={style.names}>
@@ -184,10 +184,6 @@ function Dashboard(props) {
               <div
                 key={index}
                 className={style.chat}
-                onClick={() => {
-                  localStorage.setItem("activechat", JSON.stringify(user));
-                  // console.log(activeuser);
-                }}
               >
                 <div className={style.ticketdetails}>
                   <div className={style.names}>
@@ -250,10 +246,6 @@ function Dashboard(props) {
               <div
                 key={index}
                 className={style.chat}
-                onClick={() => {
-                  localStorage.setItem("activechat", JSON.stringify(user));
-                  // console.log(activeuser);
-                }}
               >
                 <div className={style.ticketdetails}>
                   <div className={style.names}>
@@ -316,10 +308,6 @@ function Dashboard(props) {
               <div
               key={index}
               className={style.chat}
-              onClick={() => {
-                localStorage.setItem("activechat", JSON.stringify(user));
-                // console.log(activeuser);
-              }}
             >
               <div className={style.ticketdetails}>
                 <div className={style.names}>

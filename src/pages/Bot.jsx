@@ -4,8 +4,7 @@ import chaticon from "../assets/Icon.svg";
 import send from "../assets/Send.svg";
 import { BotCOntext } from "../context/BotContext";
 import TimePicker from "./TimePicker.jsx";
-TimePicker
-
+TimePicker;
 
 function Bot() {
   const {
@@ -19,21 +18,86 @@ function Bot() {
     welcomemessage1,
     welcomemessage2,
     defaultDesc,
+    botconfig,
   } = useContext(BotCOntext);
-
-
- 
 
   return (
     <div className={style.main}>
       <div className={style.left}>
         <div className={style.preview}>
-          <div className={style.head}>
+          <div
+            style={{
+              backgroundColor: selectedheadercolor,
+            }}
+            className={style.head}
+          >
             <img src={chaticon} alt="chat icon" />
             <h2 className={style.chattitle}>Hubly</h2>
           </div>
 
-          <div className={style.body}></div>
+          <div
+            style={{
+              backgroundColor: selectedbodycolor,
+            }}
+            className={style.body}>
+            <div className={style.welcome}>
+              <img src={chaticon} alt="" />
+              <div>
+                {botconfig.welcomemessages.map((message, index) => (
+                  <p className={style.messagep} key={index}>
+                    {message}
+                  </p>
+                ))}
+              </div>
+            </div>
+
+            <div className={style.userInput}>
+                          <img className={style.inputimage} src={chaticon} alt="" />
+                          <div className={style.innerinput}>
+                            <p>introduce yourself</p>
+                            <br />
+                            <label htmlFor="name">Your name</label>
+                            <br />
+                            <input
+                              name="name"
+                              type="text"
+                              placeholder="Your name"
+                              onChange={(e) => {
+                                handleChange(e);
+                              }}
+                            />
+                            <br />
+                            <br />
+                            <label htmlFor="mobile">Your mobile</label>
+                            <br />
+                            <input
+                              name="phone"
+                              type="text"
+                              placeholder="your mobile"
+                              onChange={(e) => {
+                                handleChange(e);
+                              }}
+                            />
+                            <br />
+                            <br />
+                            <label htmlFor="email">Your email</label>
+                            <br />
+                            <input
+                              name="email"
+                              type="text"
+                              placeholder="Your email"
+                              onChange={(e) => {
+                                handleChange(e);
+                              }}
+                            />
+                            <br />
+            
+                            <button className={style.submit}>
+                              Thank You
+                            </button>
+                          </div>
+                        </div>
+          </div>
 
           <div className={style.message}>
             <textarea
@@ -69,7 +133,7 @@ function Bot() {
             <div
               onClick={() => {
                 setSelectedheadercolor("#FFFFFF");
-                localStorage.setItem('selectedheadercolor', '#FFFFFF')
+                localStorage.setItem("selectedheadercolor", "#FFFFFF");
               }}
               className={style.hc1}
             >
@@ -78,7 +142,7 @@ function Bot() {
             <div
               onClick={() => {
                 setSelectedheadercolor("#000000");
-                localStorage.setItem('selectedheadercolor', '#000000')
+                localStorage.setItem("selectedheadercolor", "#000000");
               }}
               className={style.hc2}
             >
@@ -87,7 +151,7 @@ function Bot() {
             <div
               onClick={() => {
                 setSelectedheadercolor("#33475B");
-                localStorage.setItem('selectedheadercolor', '#33475B')
+                localStorage.setItem("selectedheadercolor", "#33475B");
               }}
               className={style.hc3}
             >
@@ -114,7 +178,7 @@ function Bot() {
             <div
               onClick={() => {
                 setselectedbodycolor("#FFFFFF");
-                localStorage.setItem('selectedbodycolor', '#FFFFFF')
+                localStorage.setItem("selectedbodycolor", "#FFFFFF");
               }}
               className={style.hc1}
             >
@@ -123,7 +187,7 @@ function Bot() {
             <div
               onClick={() => {
                 setselectedbodycolor("#E8E8E8");
-                localStorage.setItem('selectedbodycolor', '#E8E8E8')
+                localStorage.setItem("selectedbodycolor", "#E8E8E8");
               }}
               className={style.bc}
             >
@@ -132,7 +196,7 @@ function Bot() {
             <div
               onClick={() => {
                 setselectedbodycolor("#000000");
-                localStorage.setItem('selectedbodycolor', '#000000')
+                localStorage.setItem("selectedbodycolor", "#000000");
               }}
               className={style.hc2}
             >
@@ -160,7 +224,7 @@ function Bot() {
             value={welcomemessage1}
             onChange={(e) => {
               setWelcomeMessaage1(e.target.value);
-              localStorage.setItem('welcomemessage1', e.target.value)
+              localStorage.setItem("welcomemessage1", e.target.value);
             }}
           />
           <input
@@ -169,11 +233,57 @@ function Bot() {
             value={welcomemessage2}
             onChange={(e) => {
               setWelcomeMessaage2(e.target.value);
-              localStorage.setItem('welcomemessage2', e.target.value)
+              localStorage.setItem("welcomemessage2", e.target.value);
             }}
           />
         </div>
-        <div className={style.userdetails}></div>
+        <div className={style.userdetails}>
+        <div className={style.userInput}>
+                          <div className={style.innerinput}>
+                            <p>INtroduction form</p>
+                            <br />
+                            <label htmlFor="name">Your name</label>
+                            <br />
+                            <input
+                              name="name"
+                              type="text"
+                              placeholder="Your name"
+                              onChange={(e) => {
+                                handleChange(e);
+                              }}
+                            />
+                            <br />
+                            <br />
+                            <label htmlFor="mobile">Your mobile</label>
+                            <br />
+                            <input
+                              name="phone"
+                              type="text"
+                              placeholder="+91 000 000 0000"
+                              onChange={(e) => {
+                                handleChange(e);
+                              }}
+                            />
+                            <br />
+                            <br />
+                            <label htmlFor="email">Your email</label>
+                            <br />
+                            <input
+                              name="email"
+                              type="text"
+                              placeholder="example@gmail.com"
+                              onChange={(e) => {
+                                handleChange(e);
+                              }}
+                            />
+                            <br />
+            
+                            <button className={style.submit}>
+                              Thank You
+                            </button>
+                          </div>
+                        </div>
+        </div>
         <div className={style.editmessage}>
           <p>Welcome message</p>
           <div className={style.textareadiv}>
@@ -192,7 +302,7 @@ function Bot() {
               value={defaultDesc}
               onChange={(e) => {
                 setdefaultDesc(e.target.value);
-                localStorage.setItem('defaultdesc', e.target.value)
+                localStorage.setItem("defaultdesc", e.target.value);
               }}
             ></textarea>
           </div>

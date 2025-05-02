@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import styles from "../styles/timepicker.module.css";
 import { useContext } from "react";
 import { BotCOntext } from "../context/BotContext";
+import { toast } from "react-toastify";
+
 
 const TimePicker = () => {
   const [hours, setHours] = useState("00");
@@ -15,7 +17,7 @@ const TimePicker = () => {
     parseInt(minutes) * 60000 +
     parseInt(seconds) * 1000;
     setMissedChatTimer(totalMilliseconds)
-    alert(`the missed chat timeer is : ${totalMilliseconds}`)
+    toast.success(`the missed chat timer is : ${totalMilliseconds}`)
     localStorage.setItem('missedchat', missedChatTimer)
   }
 
@@ -47,9 +49,9 @@ const TimePicker = () => {
           </option>
         ))}
       </select>
-      <button onClick={()=>{
+      <button className={styles.timesave} onClick={()=>{
         setTimer()
-      }}>save</button>
+      }}>Save</button>
     </div>
   );
 };

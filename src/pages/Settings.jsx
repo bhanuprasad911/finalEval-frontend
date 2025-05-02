@@ -16,7 +16,6 @@ function Settings() {
     password: "",
     confirmpassword: "",
   });
-  console.log()
 
   const handleFormChange = (event) => {
     setFormdata({ ...formdata, [event.target.name]: event.target.value });

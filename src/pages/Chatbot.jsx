@@ -5,12 +5,14 @@ import chaticon from "../assets/Icon.svg";
 import { addEndUser, sendMessage, fetchusers } from "../services";
 import { BotCOntext } from "../context/BotContext";
 import johndoe from "../assets/johndoe.svg";
+import { toast } from "react-toastify";
+
 
 function Chatbot() {
   const { botconfig } = useContext(BotCOntext);
   const [currentUser, setCurrentuser] = useState(() => {
     try {
-      const stored = localStorage.getItem("activeuser");
+      const stored = localStorage.getItem("currentuser");
       return stored && stored !== "undefined" ? JSON.parse(stored) : null;
     } catch (err) {
       console.error("Failed to parse activeuser:", err);
@@ -28,7 +30,7 @@ function Chatbot() {
     const matchedUser = users.data.find((user) => user._id === id);
 
     setCurrentuser(matchedUser);
-    localStorage.setItem("activeuser", JSON.stringify(matchedUser));
+    localStorage.setItem("currentuser", JSON.stringify(matchedUser));
   };
 
   useEffect(() => {
@@ -73,10 +75,10 @@ function Chatbot() {
 
   const handlesendMessage = async () => {
     if (!currentUser){
-      alert('please register yourself first')
+      toast.error('please register yourself first')
       return
     }else if(newmessage.message.trim().length === 0){
-      alert('please enter the message')
+      toast.error('please enter the message')
       return
     }
     const response = await sendMessage({ id, message: newmessage });
@@ -86,7 +88,7 @@ function Chatbot() {
     };
 
     setCurrentuser(updatedUser);
-    localStorage.setItem("activeuser", JSON.stringify(updatedUser));
+    localStorage.setItem("currentuser", JSON.stringify(updatedUser));
     setMessage({ message: "", sender: "user", receiver: "bot" });
     console.log(response);
   };
@@ -130,7 +132,7 @@ function Chatbot() {
       formdata.email.trim().length === 0 ||
       formdata.phone.trim().length === 0
     ) {
-      alert("Please fill all the fields");
+      toast.error("Please fill all the fields");
       return;
     }
 
@@ -139,7 +141,7 @@ function Chatbot() {
       const exist = allusers.find((user) => user.email === formdata.email);
       if (exist) {
         setCurrentuser(exist);
-        localStorage.setItem("activeuser", JSON.stringify(exist));
+        localStorage.setItem("currentuser", JSON.stringify(exist));
         console.log(exist);
         return;
       }
@@ -151,8 +153,9 @@ function Chatbot() {
     try {
       const response = await addEndUser(formdata);
       console.log(response);
+      toast.success('Registered succesfully')
       setCurrentuser(response.data);
-      localStorage.setItem("activeuser", JSON.stringify(response.data));
+      localStorage.setItem("currentuser", JSON.stringify(response.data));
       console.log(formdata);
       setFormdata({
         name: "",
@@ -180,7 +183,7 @@ function Chatbot() {
           }}
           className={style.body}
         >
-          {currentUser?.messages?.length > 0 ? (
+          {currentUser?.messages?.length > 0 && (
             currentUser.messages.map((item, index) => (
               <div
                 className={item.sender === "user" ? style.user : style.bot}
@@ -193,13 +196,33 @@ function Chatbot() {
                 )}
                 <p>
                   {item.message}
-                  <span className={style.time}>{item.time}</span>
                 </p>
               </div>
             ))
-          ) : (
-            <p>Start a conversation</p>
-          )}
+          ) }
+
+
+{
+            currentUser &&(
+              botconfig.welcomemessages.map((message, index)=>(
+                <div
+                className={style.bot}
+                key={index}
+              >
+                  <img src={chaticon} alt="" />
+                <p>
+                  {message}
+                </p>
+              </div>
+              ))
+            )
+          }
+          {
+            currentUser && currentUser.messages.length === 0 &&(
+                <p style={{alignSelf:'center'}}>Start a conversation</p>
+              
+            )
+          }
 
           {!currentUser ? (
             <div className={style.userInput}>

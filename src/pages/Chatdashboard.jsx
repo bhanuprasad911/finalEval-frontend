@@ -15,6 +15,8 @@ import Analytics from "./Analytics.jsx";
 import { useNavigate } from "react-router-dom";
 
 
+
+
 function Chatdashboard(props) {
   const navigate = useNavigate()
   const [active, setActive] = useState(Number(localStorage.getItem('activeTab')) || 1);
@@ -28,14 +30,31 @@ function Chatdashboard(props) {
       }
     });
 
+    const handlePageHide = () => {
+     
+      const keysToRemove = [
+        "token",
+        "currentadmin",
+        "selected",
+        "activeTab",
+        "showbot", 
+        "currentuser"
+      ];
+  
+      keysToRemove.forEach((key) => localStorage.removeItem(key));
+    }
+
     useEffect(() => {
       const token = localStorage.getItem('token');
       if (!token) {
         navigate('/', {replace:true});
+      return
       }
     }, []);
 
-  return (
+    
+
+    return (
     <div className={style.main}>
       <div className={style.nav}>
         <div className={style.uppernav}>
@@ -110,10 +129,7 @@ function Chatdashboard(props) {
           </div>
         </div>
         <LiaUserCircle   onClick={()=>{
-          localStorage.removeItem('token')
-          localStorage.removeItem('currentadmin')
-          localStorage.removeItem('activechat')
-          localStorage.removeItem('selected')
+         handlePageHide()
           navigate('/')
         }} style={
           {fontSize:'x-large'}

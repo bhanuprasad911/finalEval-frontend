@@ -11,7 +11,7 @@ export const BotContextProvider = ({ children }) => {
   const [welcomemessage1, setWelcomeMessaage1] = useState(localStorage.getItem('welcomemessage1') || "Hello, How can I help you?");
   const [welcomemessage2, setWelcomeMessaage2] = useState(localStorage.getItem('welcomemessage2') || "Ask me anything");
   const [selectedbodycolor, setselectedbodycolor] = useState(localStorage.getItem('selectedbodycolor') || "#E8E8E8");
-  const [missedChatTimer, setMissedChatTimer] = useState(localStorage.getItem('missedchat') || null);
+  const [missedChatTimer, setMissedChatTimer] = useState(localStorage.getItem('missedchat') || 3600000);
 
   const botconfig = {
     headercolor: selectedheadercolor,

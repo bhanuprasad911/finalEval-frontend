@@ -1,3 +1,5 @@
+import { MdRemoveShoppingCart } from "react-icons/md";
+
 const backendurl = import.meta.env.VITE_BACKEND_URL;
 
 const signup = async (user) => {
@@ -142,6 +144,25 @@ export const AddteamMember = async (user) => {
     return { error: err.message };
   }
 };
+
+export const editMember = async (id, formData)=>{
+  try{
+    const response = await fetch(`${backendurl}/user/member/${id}`, {
+      method:"PUT",
+      headers:{
+        "Content-Type":"application/json",
+        Accept: 'application/json'
+
+      },
+      body:JSON.stringify(formData)
+    })
+    const data = await response.json()
+    return data
+  }catch(err){
+    console.log(err)
+    return {error:err.message}
+  }
+}
 
 export const fetchTeamMembers = async (id) => {
   try {

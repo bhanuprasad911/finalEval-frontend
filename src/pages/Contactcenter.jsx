@@ -23,6 +23,9 @@ import {
 import johndoe from "../assets/johndoe.svg";
 import Select from "react-select";
 import { BotCOntext } from "../context/BotContext.jsx";
+import { toast } from "react-toastify";
+
+
 
 function Contactcenter() {
   const [currentadmin, setCurrentAdmin] = useState(
@@ -105,14 +108,16 @@ function Contactcenter() {
 
   const fetchData = async () => {
     const users = await fetchusers();
-    // console.log('users',users);
+ 
     const userfromlocalstorage = JSON.parse(localStorage.getItem("selected"));
-    const user = users.data.find(
-      (user) => user.email === userfromlocalstorage.email
-    );
-    // console.log('userfromlocalstorage', userfromlocalstorage)
-    // console.log('user',user)
-    setSelected(user);
+    if(userfromlocalstorage){
+
+      const user = users.data.find(
+        (user) => user.email === userfromlocalstorage.email
+      );
+      setSelected(user);
+    }
+   
     setUsers(users.data);
     return;
   };
@@ -134,7 +139,7 @@ function Contactcenter() {
   const handleUpdateStatus = async () => {
     if (status === selected.status) {
       setStatus("");
-      alert(`this chat is already ${selected.status} `);
+      toast.error(`this chat is already ${selected.status} `);
       return;
     }
 
@@ -145,12 +150,12 @@ function Contactcenter() {
     setStatus("");
     console.log(response);
 
-    alert(response.message);
+    toast.success(response.message);
   };
 
   const handlesendMessage = async () => {
     if (newmessage.message.trim().length === 0){
-      alert('Please enter the message')
+      toast.error('Please enter the message')
       return
     }
     const res = await sendMessage({ id, message: newmessage });
@@ -240,19 +245,37 @@ function Contactcenter() {
                     >
                       {message.sender === "bot" ? (
                         <>
+                        <div>
+                          <h4>{currentadmin.firstname}</h4>
                           <p>{message.message}</p>
+                          </div>
                           <img src={chaticon} alt="" />
                         </>
                       ) : (
                         <>
                           <img src={johndoe} alt="" />
+                          <div>
+                            <h4>{selected.name}</h4>
                           <p>{message.message}</p>
+                          </div>
                         </>
                       )}
+                      
                     </div>
+
                   ))
 
                 }
+                {
+                        selected?.isMissed === true &&(
+                        <><br />
+                        
+                        <p style={{color:'red',
+                          alignSelf:'center'
+                        }}>replying to missed chat</p>
+                        </>
+                        )
+                      }
               </div>
 
               <div className={style.userinput}>

@@ -4,9 +4,13 @@ import AuthImage from "../assets/Authentication.png";
 import mainlogo from "../assets/logo.svg";
 
 
+
 import signup from "../services/index.js";
+import {ToastContainer, toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 function Signup() {
+  const navigate = useNavigate()
   const [checked, setChecked] = useState(false);
   const [formData, setFormData] = useState({
     firstname: "",
@@ -38,19 +42,21 @@ function Signup() {
       formData.confirmPassword.trim().length === 0||
       checked===false
     ) {
-      alert("Please fill all the fields");
+      toast.error("Please fill all the fields");
       return;
     }else if(formData.password != formData.confirmPassword){
-      alert('password and confirm password did not match')
+      toast.error('password and confirm password did not match')
       return
     }
     try {
       const res = await signup(formData);
       console.log(res);
       if (res.user) {
+        toast.success('Signup success')
         window.location.href = "/login";
       } else {
-        alert(res.message || "Signup Failed");
+        // alert(res.message || "Signup Failed");
+        toast.error(err.message || 'Signup failed')
         setFormData({
           firstname: "",
           lastname: "",
@@ -63,12 +69,14 @@ function Signup() {
       }
     } catch (err) {
       console.log(err);
-      alert("signin failed");
+      // alert("signin failed");
+      toast.error('Signup failed')
     }
   };
 
   return (
     <div className={style.main}>
+      <ToastContainer position="top-center" autoClose={3000}/>
       <div className={style.left}>
         <img className={style.mainlogo} src={mainlogo} alt="mainlogo" />
         <div className={style.inputs}>

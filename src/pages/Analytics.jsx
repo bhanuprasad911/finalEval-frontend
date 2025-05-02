@@ -8,20 +8,64 @@ import ChartComponent from "./ChartComponent.jsx";
 function Analytics() {
   const [resolveCount, setresolvedCount] = useState(0);
   const [chatCount, setChatCount] = useState(0);
+  const [users, setusers] = useState([])
+  const [ReplyTime, setReplyTime] = useState(null)
 
   const getUsers = async () => {
     const response = await fetchusers();
-    // setCount(response.data.length)
     console.log(response);
     console.log(response.data.length);
-    const resolved = response.data.filter((user) => user.status === "resolved");
     setChatCount(response.data.length);
+    setusers(response.data)
+    const resolved = response.data.filter((user) => user.status === "resolved");
+    
     setresolvedCount(Math.ceil((resolved.length / response.data.length) * 100));
-  };
+
+    const messagesWithReplies = response.data.filter(item =>
+      item.messages.some(message => message.sender === 'bot')
+    );
+    console.log(messagesWithReplies)
+  
+  let totalReplyTime = 0;
+  let replyCount = 0;
+  
+  messagesWithReplies.forEach(ticket => {
+    const sortedMessages = [...ticket.messages].sort(
+      (a, b) => new Date(a.createdAt) - new Date(b.createdAt)
+    );
+
+    const botFirstIndex = sortedMessages.findIndex(msg => msg.sender === 'bot');
+  
+    if (botFirstIndex > 0) {
+      const userBeforeBot = [...sortedMessages]
+        .slice(0, botFirstIndex)
+        .reverse()
+        .find(msg => msg.sender === 'user');
+  
+      if (userBeforeBot) {
+        const userTime = new Date(userBeforeBot.createdAt).getTime();
+        const botTime = new Date(sortedMessages[botFirstIndex].createdAt).getTime();
+  
+        const replyTime = botTime - userTime;
+  
+        totalReplyTime += replyTime;
+        replyCount++;
+      }
+    }
+  });
+  
+  const averageReplyTimeMs = replyCount > 0 ? totalReplyTime / replyCount : 0;
+  const averageReplyTimeSeconds = Math.round(averageReplyTimeMs / 1000);
+  setReplyTime(averageReplyTimeSeconds)
+  
+  console.log(`Average reply time: ${averageReplyTimeSeconds} seconds`);
+}
 
   useEffect(() => {
     getUsers();
-  });
+  },[]);
+
+
   return (
     <div className={style.main}>
       <h2 style={{ fontWeight: "500", color: " #6a6b70" }}>Analytics</h2><br />
@@ -42,7 +86,7 @@ function Analytics() {
         </p>
 
         </div>
-        <h1 style={ { color: "#00d907",fontWeight: "400"}}> 0 sec</h1>
+        <h1 style={ { color: "#00d907",fontWeight: "400"}}> {ReplyTime?ReplyTime:0} secs</h1>
         
       </div><br />
       <div className={style.resolve}>

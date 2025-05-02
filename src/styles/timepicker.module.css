@@ -30,4 +30,12 @@
     font-weight: 500;
     color: #333;
   }
+  .timesave{
+    background-color: #244778;
+    cursor: pointer;
+    border: none;
+    padding: 3%;
+    color: white;
+    border-radius: 10px;
+  }
   
