@@ -1,7 +1,7 @@
 import { createContext, useEffect, useState } from "react";
 import { io } from "socket.io-client";
 
-const socket = io("http://192.168.0.15:8001");
+const socket = io("https://finaleval-backend-1.onrender.com/");
 
 export const BotCOntext = createContext();
 
